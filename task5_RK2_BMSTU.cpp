@@ -26,25 +26,25 @@ public:
     void deposit(float amount) { 
         if (amount > 0) { 
             balance += amount; 
-            cout << "Ïîïîëíåíî íà: " << amount << endl; 
+            cout << "Ð¿Ð¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¾ Ð½Ð°:  " << amount << endl; 
         } else { 
-            cout << "Íå âåðíàÿ ñóììà ïîïîëíåíèÿ ." << endl; 
+            cout << "Ð½Ðµ Ð²ÐµÑ€Ð½Ð°Ñ ÑÑƒÐ¼Ð¼Ð° Ð¿Ð¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ" << endl; 
         }
     } 
 
     void withdraw(float amount) { 
         if (amount > 0 && amount <= balance) { 
             balance -= amount; 
-            cout << "Ñíÿòî ñî ñ÷åòà: " << amount << endl; 
+            cout << "Ð¡Ð½ÑÑ‚Ð¾ ÑÐ¾ ÑÑ‡ÐµÑ‚Ð°: " << amount << endl; 
         } else if (amount > balance) { 
-            cout << "Íåäîñòàòî÷íî ñðåäñòâ." << endl; 
+            cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÑ€ÐµÐ´ÑÑ‚Ð²." << endl; 
         } else { 
-            cout << "Íå âåðíàÿ ñóììà ñíÿòèÿ." << endl; 
+            cout << "Ð½ÐµÐ²ÐµÑ€Ð½Ð°Ñ ÑÑƒÐ¼Ð¼Ð° ÑÐ½ÑÑ‚Ð¸Ñ." << endl; 
         } 
     }
 
     void showBalance() const { 
-        cout << "Òåêóùèé áàëàíñ: " << balance << endl; 
+        cout << "Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð±Ð°Ð»Ð°Ð½Ñ: " << balance << endl; 
     } 
 }; 
 class SavingAccount : public BankAccount{
@@ -69,12 +69,12 @@ class SavingAccount : public BankAccount{
 	}
 	
 	void bal_with_proc(){
-		cout<<"âàø áàëàíñ ïîñëå íà÷èñëåíèÿ ïðîöåíòîâ" << balance_s << endl;
+		cout<<"Ð²Ð°Ñˆ Ð±Ð°Ð»Ð°Ð½Ñ Ð¿Ð¾ÑÐ»Ðµ Ð½Ð°Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¾Ñ†ÐµÐ½Ñ‚Ð¾Ð²" << balance_s << endl;
 	    
 	}
 	
 	void new_stawka(){
-		cout<<"ââåäèòå íîâóþ ïðîöåíòóþ ñòàâêó"<<endl;
+		cout<<"Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²ÑƒÑŽ Ð¿Ñ€Ð¾Ñ†ÐµÐ½Ñ‚Ð½ÑƒÑŽ ÑÑ‚Ð°Ð²ÐºÑƒ"<<endl;
 		cin>>procents;
 		
 	}
@@ -89,16 +89,16 @@ int main() {
     int procents;
     
     
-    cout << "Âåäèòå íîìåð ñ÷åòà: "; 
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÑÑ‡ÐµÑ‚Ð°: "; 
     cin >> accountNum; 
 
-    cout << "Âøå èìÿ: "; 
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ: "; 
     cin >> ownerName; 
 
-    cout << "Ââåäèòå íà÷àëüíûé áàëàíñ: "; 
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð±Ð°Ð»Ð°Ð½Ñ: "; 
     cin >> initialBalance; 
 
-    cout << "Ââåäèòå ïðîöåíòíóþ ñòàâêó: ";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾Ñ†ÐµÐ½Ñ‚Ð½ÑƒÑŽ ÑÑ‚Ð°Ð²ÐºÑƒ: ";
     cin >> procents;
     
 
@@ -108,23 +108,23 @@ int main() {
     float withdrawAmount; 
     int years;
     do{
-        cout<<"1: ïîïîëíèòü áàëàíñ"<<endl;
-        cout<<"2: ñíÿòü äåíüãè ñî ñ÷åòà"<<endl;
-        cout<<"3: ïîñìîòðåòü áàëàíñ"<<endl;
-        cout<<"4: íà÷èñëèòü ïðîöåíòû"<<endl;
-        cout<<"5: îáíîâèòü ñòàâêó"<<endl;
+        cout<<"1: Ð¿Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð±Ð°Ð»Ð°Ð½Ñ"<<endl;
+        cout<<"2: ÑÐ½ÑÑ‚ÑŒ Ð´ÐµÐ½ÑŒÐ³Ð¸ ÑÐ¾ ÑÑ‡ÐµÑ‚Ð°"<<endl;
+        cout<<"3: Ð¿Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð±Ð°Ð»Ð°Ð½Ñ"<<endl;
+        cout<<"4: Ð½Ð°Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ Ð¿Ñ€Ð¾Ñ†ÐµÐ½Ñ‚Ñ‹"<<endl;
+        cout<<"5: Ð¾Ð±Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð°ÐºÑƒ"<<endl;
         	
 		
 		cin>>vibor;
 		switch(vibor){
 			case 1:
-				cout << "Ââåäèòå ðàçìåð äåïà: "<<endl; 
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð´ÐµÐ¿Ð°: "<<endl; 
                 cin >> depositAmount; 
                 myAccount.deposit(depositAmount); 
                 break;
                 
 			case 2:
-				cout << "Ââåäèòå ñóììó äëÿ ñíÿòèÿ : "<<endl; 
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑƒÐ¼Ð¼Ñƒ Ð´Ð»Ñ ÑÐ½ÑÑ‚Ð¸Ñ: "<<endl; 
                 cin >> withdrawAmount; 
                 myAccount.withdraw(withdrawAmount); 
                 break;
@@ -133,7 +133,7 @@ int main() {
 				myAccount.showBalance(); 
 				break;
 			case 4:
-				cout<<"ââåäèòå êîëè÷åñòâî ëåò äëÿ âêëàäà"<<endl;
+				cout<<"Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð»ÐµÑ‚ Ð´Ð»Ñ Ð²ÐºÐ»Ð°Ð´Ð°"<<endl;
 				cin>>years;
 				myAccount.stavka(years);
 				myAccount.bal_with_proc();
@@ -144,7 +144,7 @@ int main() {
 				myAccount.new_stawka();
 				
 		    default:
-		    	cout<<"ïîïðîáóé äðóãîé âàðèàííò"<<endl;
+		    	cout<<"Ð¿Ð¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹ Ð´Ñ€ÑƒÐ³Ð¾Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚"<<endl;
 				
 			
 		}
@@ -156,6 +156,4 @@ int main() {
 
     return 0; 
 }
-
-
 
