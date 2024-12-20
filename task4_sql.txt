@@ -1,0 +1,80 @@
+---процедура update_stock для выполнения операций добавления или удаления товаров.
+
+
+
+таблица products
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    quantity INTEGER NOT NULL
+);
+
+
+
+
+таблица operations_log
+CREATE TABLE operations_log (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products(id),
+    operation VARCHAR CHECK (operation IN ('ADD', 'REMOVE')),
+    quantity INTEGER NOT NULL
+);
+
+
+
+
+ !!!update_stock!!!
+ CREATE OR REPLACE PROCEDURE update_stock(product_id INT, operation VARCHAR, quantity INT) AS $$
+DECLARE
+    current_quantity INTEGER;
+BEGIN
+    
+    SELECT quantity INTO current_quantity FROM products WHERE id = product_id;
+
+    IF operation = 'ADD' THEN
+        
+        UPDATE products SET quantity = current_quantity + quantity WHERE id = product_id;
+        
+    ELSIF operation = 'REMOVE' THEN
+        
+        IF current_quantity - quantity < 0 THEN
+            RAISE EXCEPTION 'Cannot remove more than available quantity';
+        ELSE
+            UPDATE products SET quantity = current_quantity - quantity WHERE id = product_id;
+        END IF;
+    
+    ELSE
+        RAISE EXCEPTION 'Invalid operation';
+    END IF;
+
+    
+    INSERT INTO operations_log (product_id, operation, quantity) VALUES (product_id, operation, quantity);
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+ Создание триггера...
+
+ CREATE OR REPLACE FUNCTION log_product_operations() RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'UPDATE' THEN
+        IF NEW.quantity > OLD.quantity THEN
+            INSERT INTO operations_log (product_id, operation, quantity) 
+            VALUES (NEW.id, 'ADD', NEW.quantity - OLD.quantity);
+        ELSIF NEW.quantity < OLD.quantity THEN
+            INSERT INTO operations_log (product_id, operation, quantity) 
+            VALUES (NEW.id, 'REMOVE', OLD.quantity - NEW.quantity);
+        END IF;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER product_operations_trigger
+AFTER UPDATE ON products
+FOR EACH ROW EXECUTE FUNCTION log_product_operations();
+
+
